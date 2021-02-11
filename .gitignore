@@ -1,0 +1,5 @@
+tests/
+Makefile
+*.out
+*.dSYM
+*.txt
