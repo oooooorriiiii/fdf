@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:10:27 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/12 22:39:09 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/16 03:11:24 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,11 @@ int		found_LF(char *str)
 	return (0);
 }
 
-int		get_next_line(int fd, char **line)
+int		return_process(int	read_size, char **loaded_str, char **line, int fd)
 {
-	static char	*loaded_str[FD_MAX];
-	char		buf_str[BUFFER_SIZE + 1];
-	char		*tmp;
-	int			read_size;
-	int			i;
+	char	*tmp;
+	int		i;
 
-	if (!line || (fd < 0 || fd >= FD_MAX))
-		return (-1);
-	while ((read_size = read(fd, buf_str, BUFFER_SIZE)) > 0)
-	{
-		buf_str[read_size] = '\0';
-		if (loaded_str[fd] == NULL)
-			loaded_str[fd] = ft_strdup(buf_str);
-		else
-		{
-			tmp = ft_strjoin(loaded_str[fd], buf_str);
-			free(loaded_str[fd]);
-			loaded_str[fd] = tmp;
-		}
-		if (found_LF(loaded_str[fd]))
-			break ;
-	}
-	// TODO: return value handle, line <- loaded_str or buf_str
 	i = 0;
 	if (read_size < 0)
 		return (-1);
@@ -61,7 +41,7 @@ int		get_next_line(int fd, char **line)
 		return (0);
 	else
 	{
-		while ((loaded_str[fd][i] != '\n' && loaded_str[fd][i] != '\0'))
+		while (loaded_str[fd][i] != '\n' && loaded_str[fd][i] != '\0')
 			i++;
 		if (loaded_str[fd][i] == '\n')
 		{
@@ -83,4 +63,32 @@ int		get_next_line(int fd, char **line)
 		}
 		return (1);
 	}
+}
+
+int		get_next_line(int fd, char **line)
+{
+	static char	*loaded_str[FD_MAX];
+	char		buf_str[BUFFER_SIZE + 1];
+	char		*tmp;
+	int			read_size;
+	int			ret;
+
+	if (!line || (fd < 0 || fd >= FD_MAX))
+		return (-1);
+	while ((read_size = read(fd, buf_str, BUFFER_SIZE)) > 0)
+	{
+		buf_str[read_size] = '\0';
+		if (loaded_str[fd] == NULL)
+			loaded_str[fd] = ft_strdup(buf_str);
+		else
+		{
+			tmp = ft_strjoin(loaded_str[fd], buf_str);
+			free(loaded_str[fd]);
+			loaded_str[fd] = tmp;
+		}
+		if (found_LF(loaded_str[fd]))
+			break ;
+	}
+	ret = return_process(read_size, loaded_str, line, fd);
+	return (ret);
 }
