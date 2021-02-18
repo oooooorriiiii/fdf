@@ -1,6 +1,10 @@
 tests/
+test*
 Makefile
 *.out
 *.dSYM
 *.txt
 .vscode
+42TESTERS-GNL
+resources
+get_next_line-test

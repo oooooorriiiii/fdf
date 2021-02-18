@@ -6,18 +6,15 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:10:27 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/16 03:11:24 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/19 02:52:24 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#define BUFFER_SIZE 100000
-#define FD_MAX 1025
-
-int		found_LF(char *str)
+static int	found_newline(char *str)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -29,52 +26,68 @@ int		found_LF(char *str)
 	return (0);
 }
 
-int		return_process(int	read_size, char **loaded_str, char **line, int fd)
+void		str_free(char **p)
 {
-	char	*tmp;
-	int		i;
+	if (p != NULL && *p != NULL)
+	{
+		free(*p);
+		*p = NULL;
+	}
+}
+
+static int	set_up_line(ssize_t read_size, char **loaded_str,\
+						char **line, int fd)
+{
+	char		*tmp;
+	size_t		i;
 
 	i = 0;
+	while (loaded_str[fd][i] != '\n' && loaded_str[fd][i] != '\0')
+		i++;
+	if (loaded_str[fd][i] == '\n')
+	{
+		*line = ft_substr(loaded_str[fd], 0, i);
+		tmp = ft_strdup(&loaded_str[fd][i + 1]);
+		free(loaded_str[fd]);
+		loaded_str[fd] = tmp;
+		if (loaded_str[fd][0] == '\0')
+			str_free(&loaded_str[fd]);
+	}
+	else
+	{
+		*line = ft_strdup(loaded_str[fd]);
+		str_free(&loaded_str[fd]);
+		if (read_size == 0 && loaded_str[fd] == NULL)
+			return (0);
+	}
+	return (1);
+}
+
+static int	return_process(ssize_t read_size, char **loaded_str,\
+						char **line, int fd)
+{
 	if (read_size < 0)
 		return (-1);
 	else if (read_size == 0 && loaded_str[fd] == NULL)
 		return (0);
 	else
 	{
-		while (loaded_str[fd][i] != '\n' && loaded_str[fd][i] != '\0')
-			i++;
-		if (loaded_str[fd][i] == '\n')
-		{
-			*line = ft_substr(loaded_str[fd], 0, i);
-			tmp = ft_strdup(&loaded_str[fd][i + 1]);
-			free(loaded_str[fd]);
-			loaded_str[fd] = tmp;
-			if (loaded_str[fd][0] == '\0')
-			{
-				free(loaded_str[fd]);
-				loaded_str[fd] = NULL;
-			}
-		}
-		else
-		{
-			*line = ft_strdup(loaded_str[fd]);
-			free(loaded_str[fd]);
-			loaded_str[fd] = NULL;
-		}
-		return (1);
+		return (set_up_line(read_size, loaded_str, line, fd));
 	}
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char	*loaded_str[FD_MAX];
-	char		buf_str[BUFFER_SIZE + 1];
+	char		*buf_str;
 	char		*tmp;
-	int			read_size;
-	int			ret;
+	ssize_t		read_size;
 
-	if (!line || (fd < 0 || fd >= FD_MAX))
+	if (!line || (fd < 0 || fd >= FD_MAX) || BUFFER_SIZE < 0 || \
+		!(buf_str = malloc(sizeof(char) * (BUFFER_SIZE + 1))) || \
+		!(*line = malloc(1)))
 		return (-1);
+	*line[0] = '\0';
 	while ((read_size = read(fd, buf_str, BUFFER_SIZE)) > 0)
 	{
 		buf_str[read_size] = '\0';
@@ -86,9 +99,8 @@ int		get_next_line(int fd, char **line)
 			free(loaded_str[fd]);
 			loaded_str[fd] = tmp;
 		}
-		if (found_LF(loaded_str[fd]))
+		if (found_newline(loaded_str[fd]))
 			break ;
 	}
-	ret = return_process(read_size, loaded_str, line, fd);
-	return (ret);
+	return (return_process(read_size, loaded_str, line, fd));
 }
