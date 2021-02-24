@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:10:27 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/22 16:48:07 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/24 17:19:26 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,11 @@ static int	return_process(ssize_t read_size, char **loaded_str,\
 int			get_next_line(int fd, char **line)
 {
 	static char	*loaded_str[FD_MAX];
-	char		*buf_str;
+	char		buf_str[BUFFER_SIZE + 1];
 	char		*tmp;
 	ssize_t		read_size;
 
-	if (!line || (fd < 0 || fd >= FD_MAX) || BUFFER_SIZE < 0 || \
-		!(buf_str = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	if (!line || (fd < 0 || fd >= FD_MAX))
 		return (-1);
 	while ((read_size = read(fd, buf_str, BUFFER_SIZE)) > 0)
 	{
