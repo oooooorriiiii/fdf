@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:10:27 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/19 14:59:13 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/24 13:43:35 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ static int	return_process(ssize_t read_size, char **loaded_str,\
 	if (read_size < 0)
 		return (-1);
 	else if (read_size == 0 && loaded_str[fd] == NULL)
+	{
+		*line = ft_strdup("");
 		return (0);
+	}
 	else
 	{
 		return (set_up_line(read_size, loaded_str, line, fd));
@@ -84,10 +87,8 @@ int			get_next_line(int fd, char **line)
 	ssize_t		read_size;
 
 	if (!line || (fd < 0 || fd >= FD_MAX) || BUFFER_SIZE < 0 || \
-		!(buf_str = malloc(sizeof(char) * (BUFFER_SIZE + 1))) || \
-		!(*line = malloc(1)))
+		!(buf_str = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	*line[0] = '\0';
 	while ((read_size = read(fd, buf_str, BUFFER_SIZE)) > 0)
 	{
 		buf_str[read_size] = '\0';
