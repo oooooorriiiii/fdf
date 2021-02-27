@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:11:16 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/24 13:44:15 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/28 02:05:31 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
+# include <limits.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-# define FD_MAX 256
 
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
