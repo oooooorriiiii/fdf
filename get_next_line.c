@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:10:27 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/27 23:58:07 by ymori            ###   ########.fr       */
+/*   Updated: 2021/03/02 16:36:59 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	found_newline(char *str)
 	size_t		i;
 
 	i = 0;
+	if (str == NULL)
+		return (1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\n')
