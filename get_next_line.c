@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:10:27 by ymori             #+#    #+#             */
-/*   Updated: 2021/03/02 16:36:59 by ymori            ###   ########.fr       */
+/*   Updated: 2021/03/09 21:35:20 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int			get_next_line(int fd, char **line)
 	ssize_t		read_size;
 
 	if (!line || (fd < 0 || fd >= OPEN_MAX) || \
-		!(buf_str = malloc((BUFFER_SIZE + 1) * sizeof(char))))
+		!(buf_str = malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char))))
 		return (-1);
 	while ((read_size = read(fd, buf_str, BUFFER_SIZE)) > 0)
 	{
