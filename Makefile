@@ -6,7 +6,8 @@ CC		=	gcc
 SRCS	=	main.c
 OBJS	=	$(SRCS:%.c=%.o)
 
-MLX_DIR	=	minilibx-linux
+MLX_DIR		=	minilibx-linux
+LIBFT_DIR	=	libft
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -L$(MLX_DIR) -lmlx -lXext -lX11  -o $(NAME)
+	$(CC) $(OBJS) -L$(MLX_DIR) libft/libft.a -lmlx -lXext -lX11  -o $(NAME)

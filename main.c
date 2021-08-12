@@ -8,7 +8,7 @@
 #include <sys/shm.h>
 #include <X11/extensions/XShm.h>
 #include "./minilibx-linux/mlx.h" 
-//#include "./get_next_line/get_next_line.h"
+#include "./libft/get_next_line.h"
 
 # define KEY_ESC 65307
 
@@ -62,7 +62,7 @@ int	get_x(char *file)
 t_view	file_reader(char *filename)
 {
 	t_view	view_tmp;
-	printf("%d\n", get_x(filename));
+	printf("%d\n", get_x(filename)); //AAAAAAAAAAAAAAAAAAa
 	return(view_tmp);
 }
 
