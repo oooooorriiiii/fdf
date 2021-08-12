@@ -8,7 +8,7 @@
 #include <sys/shm.h>
 #include <X11/extensions/XShm.h>
 #include "./minilibx-linux/mlx.h" 
-#include "./get_next_line/get_next_line.h"
+//#include "./get_next_line/get_next_line.h"
 
 # define KEY_ESC 65307
 
@@ -79,3 +79,4 @@ int	main(int args, char **argv)
 	mlx_loop(view.mlx);
 	return (0);
 }
+
