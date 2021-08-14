@@ -15,10 +15,12 @@
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
 
+
 typedef struct s_view
 {
 	void	*mlx;
 	void	*win;
+	char	*img_ptr;
 }	t_view;
 
 int	closer(int keycode, t_view *view)
@@ -33,7 +35,6 @@ int	key_hook(int key, void *v)
 	t_view	*view;
 
 	view = (t_view *)v;
-	printf("key = %d\n", key); // DEBUG
 	if (key == KEY_ESC)
 		closer(KEY_ESC, view);
 	return (0);
@@ -52,11 +53,11 @@ int	get_x(char *file)
 	while (get_next_line(fd, &line) > 0)
 	{
 		lines++;
+		printf("%s\n", line); //AAAAAAAAAAa
 		free(line);
 	}
 	close(fd);
 	return (lines);
-
 }
 
 t_view	file_reader(char *filename)
@@ -75,6 +76,20 @@ int	main(int args, char **argv)
 	view = file_reader(argv[1]);
 	view.mlx = mlx_init();
 	view.win = mlx_new_window(view.mlx, 1920, 1080, "fdf");
+	view.img_ptr = mlx_new_image(view.mlx, 1920, 1080);
+	mlx_put_image_to_window(view.mlx, view.win, view.img_ptr, 0, 0);
+	int i = 0;
+	while (i < 200)
+	{
+		int j = 0;
+		while (j < 200)
+		{
+			mlx_pixel_put(view.mlx, view.win, i, j, 127);
+			j++;
+		}
+		i++;
+	}
+	
 	mlx_hook(view.win, EVENT_KEY_PRESS, EVENT_KEY_RELEASE, key_hook, &view);
 	mlx_loop(view.mlx);
 	return (0);
