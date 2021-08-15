@@ -16,27 +16,40 @@
 # define EVENT_KEY_RELEASE 3
 
 
-typedef struct s_view
+typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	char	*img_ptr;
-}	t_view;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixcel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
-int	closer(int keycode, t_view *view)
+// TODO: void	my_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixcel / 8));
+	*(unsigned int*)dst = color;
+}
+
+int	closer(int keycode, t_data *data)
 {
 	(void)keycode;
-	mlx_destroy_window(view->mlx, view->win);
+	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }
 
 int	key_hook(int key, void *v)
 {
-	t_view	*view;
+	t_data	*data;
 
-	view = (t_view *)v;
+	data = (t_data *)v;
 	if (key == KEY_ESC)
-		closer(KEY_ESC, view);
+		closer(KEY_ESC, data);
 	return (0);
 }
 
@@ -60,38 +73,57 @@ int	get_x(char *file)
 	return (lines);
 }
 
-t_view	file_reader(char *filename)
+t_data	file_reader(char *filename)
 {
-	t_view	view_tmp;
+	t_data	data_tmp;
 	printf("%d\n", get_x(filename)); //AAAAAAAAAAAAAAAAAAa
-	return(view_tmp);
+	return(data_tmp);
 }
 
+int put_circle(int hight, int width, int  x, int y)
+{
+    int c_x;
+    int c_y;
+    int radius;
+
+    c_x = width / 2;
+    c_y = hight / 2;
+    radius = 100;
+    //if ((c_x - radius <= x && x <= c_x + radius) && (c_y - radius <= y && y <= c_y + radius))
+    if ((x - c_x) * (x -c_x) + (y - c_y) * (y - c_y) <= radius * radius)
+        return (0x00FF0000);
+    return (0);
+}
 
 int	main(int args, char **argv)
 {
-	t_view	view;
+	t_data	data;
 
 	(void)args;
-	view = file_reader(argv[1]);
-	view.mlx = mlx_init();
-	view.win = mlx_new_window(view.mlx, 1920, 1080, "fdf");
-	view.img_ptr = mlx_new_image(view.mlx, 1920, 1080);
-	mlx_put_image_to_window(view.mlx, view.win, view.img_ptr, 0, 0);
+	data = file_reader(argv[1]);
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "fdf");
+	// data.img_ptr = mlx_new_image(data.mlx, 1920/2, 1080/2);
+	// mlx_put_image_to_window(data.mlx, data.win, data->img.img_ptr, 1920/2, 1080/2);
+	// data.img->img_ptr = mlx_new_image(data.mlx, 1920, 1080);
+	// data.img->addr = mlx_get_data_addr(data.img->img_ptr, &(data.img->bits_per_pixcel), &(data.img->line_length), &(data.img->endian));
+	data.img = mlx_new_image(data.mlx, 1920, 1080);
+	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixcel, &data.line_length, &data.endian);
 	int i = 0;
-	while (i < 200)
+	while (i < 1000)
 	{
 		int j = 0;
-		while (j < 200)
+		while (j < 1000)
 		{
-			mlx_pixel_put(view.mlx, view.win, i, j, 127);
+			my_mlx_pixel_put(&data, i, j, put_circle(1000, 1000, i, j));
 			j++;
 		}
 		i++;
 	}
-	
-	mlx_hook(view.win, EVENT_KEY_PRESS, EVENT_KEY_RELEASE, key_hook, &view);
-	mlx_loop(view.mlx);
+	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
+	mlx_hook(data.win, EVENT_KEY_PRESS, EVENT_KEY_RELEASE, key_hook, &data);
+	// mlx_hook(data.win, 33, 1L << 17, key_hook, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }
 
