@@ -13,10 +13,9 @@ int	get_x_size(char *file)
 	while (get_next_line(fd, &line)  > 0)
 	{ 
 		lines_n++;
-		printf("%s\n", line); //AAAAAAAAAAa
 		free(line);
-		line = NULL;
 	}
+	free(line);
 	close(fd);
 	return (lines_n);
 }
@@ -37,12 +36,11 @@ int	get_y_size(char *filename)
 		elems_n_tmp = elems_n;
 		elems_n = -1;
 		while (line[++elems_n]);
-		printf("%d\n", elems_n);
-		printf("%d\n", elems_n_tmp);
 		if (elems_n != elems_n_tmp && elems_n_tmp != -1)
 			error("error: invalid map");
 		free(line);
 	}
+	free(line);
 	close(fd);
 	return (elems_n);
 }
