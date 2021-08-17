@@ -15,6 +15,14 @@
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
 
+typedef struct s_base
+{
+	float	x;
+	float	y;
+	float	z;
+	int		color;
+}	t_base;
+
 
 typedef struct s_data
 {
@@ -25,6 +33,7 @@ typedef struct s_data
 	int		bits_per_pixcel;
 	int		line_length;
 	int		endian;
+	t_base	**base;
 }	t_data;
 
 t_data	file_reader(char *filename);
