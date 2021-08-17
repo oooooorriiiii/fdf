@@ -49,10 +49,11 @@ t_data	file_reader(char *filename)
 {
 	int	map_x_size;
 	int	map_y_size;
-
 	t_data	data_tmp;
+
 	map_x_size = get_x_size(filename);
 	map_y_size = get_y_size(filename);
+
 	printf("%d, %d\n", map_x_size, map_y_size);
 	return(data_tmp);
 }
