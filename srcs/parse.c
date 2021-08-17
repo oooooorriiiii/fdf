@@ -11,6 +11,20 @@ void	*ft_malloc_zero(size_t size)
 	return (ptr);
 }
 
+void	ft_strstrfree(char **strstr)
+{
+	int	i;
+
+	i = -1;
+	if (!strstr)
+		return ;
+	while (strstr[++i])
+		ft_strfree(&strstr[i]);
+	ft_strfree(strstr);
+	strstr = NULL;
+	return ;
+}
+
 int	parse_line(int fd, char ***parse_line)
 {
 	char	*line;
@@ -23,7 +37,7 @@ int	parse_line(int fd, char ***parse_line)
 		if (line[line_i] == '\t')
 			line[line_i] = ' ';
 	*parse_line = ft_split(line, ' ');
-	ft_strfree(&line);
+	ft_strstrfree(&line);
 	return (1);
 }
 
@@ -65,9 +79,9 @@ int	get_y_size(char *filename)
 		while (line[++elems_n]);
 		if (elems_n != elems_n_tmp && elems_n_tmp != -1)
 			error("error: invalid map");
-		ft_strfree(line);
+		ft_strstrfree(line);
 	}
-	ft_strfree(line);
+	ft_strstrfree(line);
 	close(fd);
 	return (elems_n);
 }
@@ -93,7 +107,7 @@ void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 			base[x_i][y_i].z = ft_atoi(parsed_line[y_i]);
 			base[x_i][y_i].color = 0x00FF00;
 		}
-		free(parsed_line);
+		ft_strstrfree(parsed_line);
 	}
 }
 
