@@ -37,7 +37,7 @@ int	parse_line(int fd, char ***parse_line)
 		if (line[line_i] == '\t')
 			line[line_i] = ' ';
 	*parse_line = ft_split(line, ' ');
-	ft_strstrfree(&line);
+	ft_strfree(&line);
 	return (1);
 }
 
@@ -105,7 +105,7 @@ void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 			base[x_i][y_i].x = y_i - map_y_size / 2;
 			base[x_i][y_i].y = x_i - map_x_size / 2;
 			base[x_i][y_i].z = ft_atoi(parsed_line[y_i]);
-			base[x_i][y_i].color = 0x00FF00;
+			base[x_i][y_i].color = 0x00FF0000;
 		}
 		ft_strstrfree(parsed_line);
 	}
@@ -125,14 +125,12 @@ t_base	**create_map(int x_size, int y_size)
 
 t_data	file_reader(char *filename)
 {
-	int	map_x_size;
-	int	map_y_size;
-	t_data	data_tmp;
+	t_data	data;
 
-	map_x_size = get_x_size(filename);
-	map_y_size = get_y_size(filename);
-	data_tmp.base = create_map(map_x_size, map_y_size);
-	parse(filename, data_tmp.base ,map_x_size, map_y_size);
+	data.map_x_size = get_x_size(filename);
+	data.map_y_size = get_y_size(filename);
+	data.base = create_map(data.map_x_size, data.map_y_size);
+	parse(filename, data.base ,data.map_x_size, data.map_y_size);
 
-	return(data_tmp);
+	return(data);
 }
