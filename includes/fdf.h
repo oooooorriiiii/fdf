@@ -40,6 +40,15 @@ typedef struct s_base
 	int		color;
 }	t_base;
 
+typedef struct s_camera
+{
+	int	zoom;
+	float	theta_x;
+	float	theta_y;
+	float	theta_z;
+}	t_camera;
+
+
 
 typedef struct s_data
 {
@@ -53,6 +62,9 @@ typedef struct s_data
 	int		map_x_size;
 	int		map_y_size;
 	t_base	**base;
+	t_base	**isometric_base;
+	t_camera	*camera;
+	float	height;
 }	t_data;
 
 

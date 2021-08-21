@@ -123,6 +123,25 @@ t_base	**create_map(int x_size, int y_size)
 	return (base);
 }
 
+t_camera	*init_camera_data(t_data *data)
+{
+	t_camera	*ret_camera_struct_ptr;
+
+	ret_camera_struct_ptr = ft_malloc_zero(sizeof(t_camera));
+	// TODO: malloc err if (ret_camera_struct_ptr == NULL)
+	ret_camera_struct_ptr->zoom = WINDOW_WIDTH / (2 * data->map_y_size);
+	ret_camera_struct_ptr->theta_x = 0;
+	ret_camera_struct_ptr->theta_y = 0;
+	ret_camera_struct_ptr->theta_z = 0;
+	return (ret_camera_struct_ptr);
+}
+
+void	init_data(t_data *data)
+{
+	data->camera = init_camera_data(data);
+	data->height = -0.1;
+}
+
 t_data	file_reader(char *filename)
 {
 	t_data	data;
@@ -131,6 +150,8 @@ t_data	file_reader(char *filename)
 	data.map_y_size = get_y_size(filename);
 	data.base = create_map(data.map_x_size, data.map_y_size);
 	parse(filename, data.base ,data.map_x_size, data.map_y_size);
+	data.isometric_base = create_map(data.map_x_size, data.map_y_size);
+	init_data(&data);
 
 	return(data);
 }
