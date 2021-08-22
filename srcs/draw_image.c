@@ -60,8 +60,8 @@ void	convert_isometric_base(float *x, float *y, int z)
 	int	pre_x;
 	int pre_y;
 
-	pre_x = (float)*x;
-	pre_y = (float)*y;
+	pre_x = (int)*x;
+	pre_y = (int)*y;
 	*x = (pre_x - pre_y) * cos(0.523599);
 	*y = -z + (pre_x + pre_y) * sin(0.523599);
 }
@@ -80,7 +80,7 @@ void	generate_isometric_base(t_data *data)
 		{
 			data->isometric_base[x_i][y_i].x *= data->camera->zoom / 2;
 			data->isometric_base[x_i][y_i].y *= data->camera->zoom / 2;
-			data->isometric_base[x_i][y_i].z *= data->camera->zoom / 2;
+			data->isometric_base[x_i][y_i].z *= data->camera->zoom / 16;
 			convert_isometric_base(&(data->isometric_base[x_i][y_i].x), &(data->isometric_base[x_i][y_i].y), data->isometric_base[x_i][y_i].z);
 			data->isometric_base[x_i][y_i].x += WINDOW_WIDTH / 2;
 			data->isometric_base[x_i][y_i].y += WINDOW_HEIGHT / 2;

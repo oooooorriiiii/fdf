@@ -20,7 +20,7 @@ void	ft_strstrfree(char **strstr)
 		return ;
 	while (strstr[++i])
 		ft_strfree(&strstr[i]);
-	ft_strfree(strstr);
+	free(strstr);
 	strstr = NULL;
 	return ;
 }
@@ -51,8 +51,8 @@ int	get_x_size(char *file)
 	if (fd < 0)
 		error("error: invalid file name");
 	lines_n = 0;
-	while (get_next_line(fd, &line)  > 0)
-	{ 
+	while (get_next_line(fd, &line) > 0)
+	{
 		lines_n++;
 		ft_strfree(&line);
 	}
@@ -75,17 +75,16 @@ int	get_y_size(char *filename)
 	while (parse_line(fd, &line) > 0)
 	{
 		elems_n_tmp = elems_n;
-		elems_n = -1;
-		while (line[++elems_n]);
+		elems_n = 0;
+		while (line[elems_n])
+			elems_n++;
 		if (elems_n != elems_n_tmp && elems_n_tmp != -1)
 			error("error: invalid map");
 		ft_strstrfree(line);
 	}
-	ft_strstrfree(line);
 	close(fd);
 	return (elems_n);
 }
-
 
 void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 {
@@ -109,6 +108,7 @@ void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 		}
 		ft_strstrfree(parsed_line);
 	}
+	close(fd);
 }
 
 t_base	**create_map(int x_size, int y_size)
@@ -149,9 +149,8 @@ t_data	file_reader(char *filename)
 	data.map_x_size = get_x_size(filename);
 	data.map_y_size = get_y_size(filename);
 	data.base = create_map(data.map_x_size, data.map_y_size);
-	parse(filename, data.base ,data.map_x_size, data.map_y_size);
+	parse(filename, data.base, data.map_x_size, data.map_y_size);
 	data.isometric_base = create_map(data.map_x_size, data.map_y_size);
 	init_data(&data);
-
-	return(data);
+	return (data);
 }
