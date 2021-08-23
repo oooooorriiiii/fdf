@@ -6,7 +6,10 @@ int	parse_line(int fd, char ***parse_line)
 	int		line_i;
 
 	if (get_next_line(fd, &line) == 0)
+	{
+		free(line);
 		return (0);
+	}
 	line_i = -1;
 	while (line[++line_i])
 		if (line[line_i] == '\t')
@@ -47,7 +50,7 @@ int	get_y_size(char *filename)
 	if (fd < 0)
 		error("error: invalid file name");
 	elems_n = -1;
-	while (parse_line(fd, &line) > 0)
+	while (parse_line(fd, &line) != 0)
 	{
 		elems_n_tmp = elems_n;
 		elems_n = 0;
@@ -79,7 +82,7 @@ void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 			base[x_i][y_i].x = y_i - map_y_size / 2;
 			base[x_i][y_i].y = x_i - map_x_size / 2;
 			base[x_i][y_i].z = ft_atoi(parsed_line[y_i]);
-			base[x_i][y_i].color = 0x00FF0000;
+			base[x_i][y_i].color = 0x0000FF00;
 		}
 		ft_strstrfree(parsed_line);
 	}

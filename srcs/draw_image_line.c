@@ -30,7 +30,7 @@ static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 {
 	while (1)
 	{
-		my_mlx_pixel_put(data, calc.x, calc.y, 0x00FF0000);
+		my_mlx_pixel_put(data, calc.x, calc.y, 0x0000FF00);
 		if ((calc.x == x1) && (calc.y == y1))
 			break ;
 		calc.err2 = 2 * calc.err;

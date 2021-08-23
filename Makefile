@@ -10,6 +10,7 @@ SRCS	=	$(SRCS_DIR)main.c \
 			$(SRCS_DIR)init.c	\
 			$(SRCS_DIR)draw_image.c \
 			$(SRCS_DIR)draw_image_line.c \
+			$(SRCS_DIR)utils.c	\
 			$(SRCS_DIR)error.c
 OBJS	=	$(SRCS:%.c=%.o)
 
