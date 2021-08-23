@@ -1,30 +1,5 @@
 #include "../includes/fdf.h"
 
-void	*ft_malloc_zero(size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-		return (0);
-	ft_bzero(ptr, size);
-	return (ptr);
-}
-
-void	ft_strstrfree(char **strstr)
-{
-	int	i;
-
-	i = -1;
-	if (!strstr)
-		return ;
-	while (strstr[++i])
-		ft_strfree(&strstr[i]);
-	free(strstr);
-	strstr = NULL;
-	return ;
-}
-
 int	parse_line(int fd, char ***parse_line)
 {
 	char	*line;
@@ -109,37 +84,6 @@ void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 		ft_strstrfree(parsed_line);
 	}
 	close(fd);
-}
-
-t_base	**create_map(int x_size, int y_size)
-{
-	t_base	**base;
-	int		x_i;
-
-	base = (t_base **)ft_malloc_zero(sizeof(t_base *) * x_size);
-	x_i = -1;
-	while (++x_i < x_size)
-		base[x_i] = (t_base *)ft_malloc_zero(sizeof(t_base) * y_size);
-	return (base);
-}
-
-t_camera	*init_camera_data(t_data *data)
-{
-	t_camera	*ret_camera_struct_ptr;
-
-	ret_camera_struct_ptr = ft_malloc_zero(sizeof(t_camera));
-	// TODO: malloc err if (ret_camera_struct_ptr == NULL)
-	ret_camera_struct_ptr->zoom = WINDOW_WIDTH / (2 * data->map_y_size);
-	ret_camera_struct_ptr->theta_x = 0;
-	ret_camera_struct_ptr->theta_y = 0;
-	ret_camera_struct_ptr->theta_z = 0;
-	return (ret_camera_struct_ptr);
-}
-
-void	init_data(t_data *data)
-{
-	data->camera = init_camera_data(data);
-	data->height = -0.1;
 }
 
 t_data	file_reader(char *filename)

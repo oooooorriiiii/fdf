@@ -68,9 +68,12 @@ typedef struct s_data
 	float	height;
 }	t_data;
 
-
-
 t_data	file_reader(char *filename);
+
+void	*ft_malloc_zero(size_t size);
+void	ft_strstrfree(char **strstr);
+void	init_data(t_data *data);
+t_base	**create_map(int x_size, int y_size);
 
 void	draw_image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

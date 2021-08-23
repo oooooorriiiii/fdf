@@ -1,6 +1,6 @@
 #include "../includes/fdf.h"
 
-t_calc	init_calc(float x0, float y0, float x1, float y1)
+static t_calc	init_calc(float x0, float y0, float x1, float y1)
 {
 	t_calc	calc;
 
@@ -26,7 +26,7 @@ t_calc	init_calc(float x0, float y0, float x1, float y1)
 	return (calc);
 }
 
-void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
+static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 {
 	while (1)
 	{
