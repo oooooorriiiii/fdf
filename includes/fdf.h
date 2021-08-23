@@ -48,8 +48,6 @@ typedef struct s_camera
 	float	theta_z;
 }	t_camera;
 
-
-
 typedef struct s_data
 {
 	void	*mlx;
@@ -68,10 +66,12 @@ typedef struct s_data
 }	t_data;
 
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 t_data	file_reader(char *filename);
 
 void	draw_image(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+void	draw_line(t_data *data, int x0, int y0, int x1, int y1);
 
 void	error(char *err_msg);
