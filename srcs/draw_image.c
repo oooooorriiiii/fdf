@@ -75,15 +75,9 @@ void	draw_image(t_data *data)
 		while (++y_i < data->map_y_size)
 		{
 			if (x_i < data->map_x_size - 1)
-				draw_line(data, data->isometric_base[x_i][y_i].x,
-					data->isometric_base[x_i][y_i].y,
-					data->isometric_base[x_i + 1][y_i].x,
-					data->isometric_base[x_i + 1][y_i].y);
+				draw_line(data, x_i, y_i, X_LINE);
 			if (y_i < data->map_y_size - 1)
-				draw_line(data, data->isometric_base[x_i][y_i].x,
-					data->isometric_base[x_i][y_i].y,
-					data->isometric_base[x_i][y_i + 1].x,
-					data->isometric_base[x_i][y_i + 1].y);
+				draw_line(data, x_i, y_i, Y_LINE);
 		}
 	}
 }

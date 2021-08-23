@@ -19,6 +19,9 @@
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
 
+# define X_LINE 0
+# define Y_LINE 1 
+
 typedef struct s_calc
 {
 	int	x;
@@ -72,6 +75,6 @@ t_data	file_reader(char *filename);
 void	draw_image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-void	draw_line(t_data *data, int x0, int y0, int x1, int y1);
+void	draw_line(t_data *data, int x_i, int y_i, int calc_type);
 
 void	error(char *err_msg);
