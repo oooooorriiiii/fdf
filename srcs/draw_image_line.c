@@ -63,26 +63,24 @@ static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 void	draw_line(t_data *data, int x_i, int y_i, int calc_type)
 {
 	t_calc	calc;
-	int		x0;
-	int		y0;
-	int		x1;
-	int		y1;
+	int		point0[2];
+	int		point1[2];
 
-	x0 = data->isometric_base[x_i][y_i].x;
-	y0 = data->isometric_base[x_i][y_i].y;
-	x1 = 0;
-	y1 = 0;
+	point0[X] = data->isometric_base[x_i][y_i].x;
+	point0[Y] = data->isometric_base[x_i][y_i].y;
+	point1[X] = 0;
+	point1[Y] = 0;
 	if (calc_type == X_LINE)
 	{
-		x1 = data->isometric_base[x_i + 1][y_i].x;
-		y1 = data->isometric_base[x_i + 1][y_i].y;
+		point1[X] = data->isometric_base[x_i + 1][y_i].x;
+		point1[Y] = data->isometric_base[x_i + 1][y_i].y;
 	}
 	if (calc_type == Y_LINE)
 	{
-		x1 = data->isometric_base[x_i][y_i + 1].x;
-		y1 = data->isometric_base[x_i][y_i + 1].y;
+		point1[X] = data->isometric_base[x_i][y_i + 1].x;
+		point1[Y] = data->isometric_base[x_i][y_i + 1].y;
 	}
-	calc = init_calc(x0, y0, x1, y1);
+	calc = init_calc(point0[X], point0[Y], point1[X], point1[Y]);
 	// init_calc_color(data, &calc, calc_type);
-	draw_line_loop(data, calc, x1, y1);
+	draw_line_loop(data, calc, point1[X], point1[Y]);
 }
