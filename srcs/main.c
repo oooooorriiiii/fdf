@@ -24,7 +24,6 @@ int	main(int args, char **argv)
 	t_data	data;
 	long	cpu_time;
 
-	printf("%d, %d", X, Y);
 	cpu_time = clock();
 	(void)args;
 	data = file_reader(argv[1]);

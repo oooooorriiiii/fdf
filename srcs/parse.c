@@ -67,6 +67,7 @@ int	get_y_size(char *filename)
 void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 {
 	char	**parsed_line;
+	char	**z_and_color;
 	int		fd;
 	int		x_i;
 	int		y_i;
@@ -81,8 +82,13 @@ void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 		{
 			base[x_i][y_i].x = y_i - map_y_size / 2;
 			base[x_i][y_i].y = x_i - map_x_size / 2;
-			base[x_i][y_i].z = ft_atoi(parsed_line[y_i]);
-			base[x_i][y_i].color = 0x0000FF00;
+			z_and_color = ft_split(parsed_line[y_i], ',');
+			base[x_i][y_i].z = ft_atoi(z_and_color[0]);
+			if (z_and_color[1])
+				base[x_i][y_i].color = ft_atoui_base(z_and_color[1], 16);
+			ft_strstrfree(z_and_color);
+			if (base[x_i][y_i].color == 0)
+				base[x_i][y_i].color = 0x0000FF00;
 		}
 		ft_strstrfree(parsed_line);
 	}

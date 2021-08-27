@@ -77,6 +77,8 @@ t_data	file_reader(char *filename);
 
 void	*ft_malloc_zero(size_t size);
 void	ft_strstrfree(char **strstr);
+unsigned int	ft_atoui_base(char *s, int base);
+
 int		gnl_fast(int fd, char **line);
 
 void	init_data(t_data *data);
