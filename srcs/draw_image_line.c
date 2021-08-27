@@ -1,6 +1,7 @@
 #include "../includes/fdf.h"
 
-static t_calc	init_calc(float x0, float y0, float x1, float y1)
+static t_calc
+	init_calc(float x0, float y0, float x1, float y1)
 {
 	t_calc	calc;
 
@@ -26,7 +27,8 @@ static t_calc	init_calc(float x0, float y0, float x1, float y1)
 	return (calc);
 }
 
-static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
+static void
+	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 {
 	while (1)
 	{
@@ -47,13 +49,14 @@ static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 	}
 }
 
-// void	init_calc_color(t_data *data, t_calc *calc, int calc_type, int x_i, int y_i)
-// {
-// 	if (calc_type == X_LINE)
-// 		calc.color = data->isometric_base[x_i + 1][y_i].color;
-// 	if (calc_type == Y_LINE)
-// 		calc.color = data->isometric_base[x_i][y_i + 1].color;
-// }
+static void
+	init_calc_color(t_data *data, t_calc *calc, int calc_type, int *i_packet)
+{
+	if (calc_type == X_LINE)
+		calc->color = data->isometric_base[i_packet[X] + 1][i_packet[Y]].color;
+	if (calc_type == Y_LINE)
+		calc->color = data->isometric_base[i_packet[X]][i_packet[Y] + 1].color;
+}
 
 /*
 ** To support norm, two points are calculated inside this function.
@@ -65,6 +68,7 @@ void	draw_line(t_data *data, int x_i, int y_i, int calc_type)
 	t_calc	calc;
 	int		point0[2];
 	int		point1[2];
+	int		i_packet[2];
 
 	point0[X] = data->isometric_base[x_i][y_i].x;
 	point0[Y] = data->isometric_base[x_i][y_i].y;
@@ -81,6 +85,8 @@ void	draw_line(t_data *data, int x_i, int y_i, int calc_type)
 		point1[Y] = data->isometric_base[x_i][y_i + 1].y;
 	}
 	calc = init_calc(point0[X], point0[Y], point1[X], point1[Y]);
-	// init_calc_color(data, &calc, calc_type);
+	i_packet[X] = x_i;
+	i_packet[Y] = y_i;
+	init_calc_color(data, &calc, calc_type, i_packet);
 	draw_line_loop(data, calc, point1[X], point1[Y]);
 }
