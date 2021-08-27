@@ -48,14 +48,16 @@ void	generate_isometric_base(t_data *data)
 		y_i = -1;
 		while (++y_i < data->map_y_size)
 		{
-			data->isometric_base[x_i][y_i].x *= data->camera->zoom / 2;
-			data->isometric_base[x_i][y_i].y *= data->camera->zoom / 2;
-			data->isometric_base[x_i][y_i].z *= data->camera->zoom / 16;
+			data->isometric_base[x_i][y_i].x *= data->camera->zoom / 0.5;
+			data->isometric_base[x_i][y_i].y *= data->camera->zoom / 0.5;
+			data->isometric_base[x_i][y_i].z *= data->camera->zoom / 1;
 			convert_isometric_base(&(data->isometric_base[x_i][y_i].x),
 				&(data->isometric_base[x_i][y_i].y),
 				data->isometric_base[x_i][y_i].z);
 			data->isometric_base[x_i][y_i].x += WINDOW_WIDTH / 2;
 			data->isometric_base[x_i][y_i].y += WINDOW_HEIGHT / 2;
+			// data->isometric_base[x_i][y_i].color = data->base[x_i][y_i].color;
+			data->isometric_base[x_i][y_i].color = 0x0000FF00;
 		}
 	}
 }

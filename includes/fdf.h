@@ -1,26 +1,31 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
-#include <math.h>
+#ifndef FDF_H
+# define FDF_H
 
-#include <X11/Xlib.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <X11/extensions/XShm.h>
-#include "../minilibx-linux/mlx.h" 
-#include "../libft/get_next_line.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <errno.h>
+# include <math.h>
+# include <X11/Xlib.h>
+# include <sys/ipc.h>
+# include <sys/shm.h>
+# include <X11/extensions/XShm.h>
+# include "../minilibx-linux/mlx.h" 
+# include "../libft/get_next_line.h"
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
-
 # define KEY_ESC 65307
-
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
-
 # define X_LINE 0
 # define Y_LINE 1 
+
+enum	e_point
+{
+	X,
+	Y,
+};
 
 typedef struct s_calc
 {
@@ -32,8 +37,8 @@ typedef struct s_calc
 	int	sy;
 	int	err;
 	int	err2;
+	int	color;
 }	t_calc;
-
 
 typedef struct s_base
 {
@@ -45,7 +50,7 @@ typedef struct s_base
 
 typedef struct s_camera
 {
-	int	zoom;
+	int		zoom;
 	float	theta_x;
 	float	theta_y;
 	float	theta_z;
@@ -53,25 +58,27 @@ typedef struct s_camera
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixcel;
-	int		line_length;
-	int		endian;
-	int		map_x_size;
-	int		map_y_size;
-	t_base	**base;
-	t_base	**isometric_base;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixcel;
+	int			line_length;
+	int			endian;
+	int			map_x_size;
+	int			map_y_size;
+	t_base		**base;
+	t_base		**isometric_base;
 	t_camera	*camera;
-	float	height;
+	float		height;
 }	t_data;
 
 t_data	file_reader(char *filename);
 
 void	*ft_malloc_zero(size_t size);
 void	ft_strstrfree(char **strstr);
+int		gnl_fast(int fd, char **line);
+
 void	init_data(t_data *data);
 t_base	**create_map(int x_size, int y_size);
 
@@ -81,3 +88,4 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *data, int x_i, int y_i, int calc_type);
 
 void	error(char *err_msg);
+#endif

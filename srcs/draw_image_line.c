@@ -30,7 +30,7 @@ static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 {
 	while (1)
 	{
-		my_mlx_pixel_put(data, calc.x, calc.y, 0x0000FF00);
+		my_mlx_pixel_put(data, calc.x, calc.y, calc.color);
 		if ((calc.x == x1) && (calc.y == y1))
 			break ;
 		calc.err2 = 2 * calc.err;
@@ -46,6 +46,14 @@ static void	draw_line_loop(t_data *data, t_calc calc, int x1, int y1)
 		}
 	}
 }
+
+// void	init_calc_color(t_data *data, t_calc *calc, int calc_type, int x_i, int y_i)
+// {
+// 	if (calc_type == X_LINE)
+// 		calc.color = data->isometric_base[x_i + 1][y_i].color;
+// 	if (calc_type == Y_LINE)
+// 		calc.color = data->isometric_base[x_i][y_i + 1].color;
+// }
 
 /*
 ** To support norm, two points are calculated inside this function.
@@ -75,5 +83,6 @@ void	draw_line(t_data *data, int x_i, int y_i, int calc_type)
 		y1 = data->isometric_base[x_i][y_i + 1].y;
 	}
 	calc = init_calc(x0, y0, x1, y1);
+	// init_calc_color(data, &calc, calc_type);
 	draw_line_loop(data, calc, x1, y1);
 }

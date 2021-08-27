@@ -1,4 +1,5 @@
 #include "../includes/fdf.h"
+#include <time.h>
 
 int	closer(int keycode, t_data *data)
 {
@@ -21,9 +22,14 @@ int	key_hook(int key, void *v)
 int	main(int args, char **argv)
 {
 	t_data	data;
+	long	cpu_time;
 
+	printf("%d, %d", X, Y);
+	cpu_time = clock();
 	(void)args;
 	data = file_reader(argv[1]);
+	printf("time: %f\n", (double)cpu_time / CLOCKS_PER_SEC);
+	puts("Finish file read");
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
 	data.img = mlx_new_image(data.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);

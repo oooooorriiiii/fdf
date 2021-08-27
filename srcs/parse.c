@@ -5,7 +5,7 @@ int	parse_line(int fd, char ***parse_line)
 	char	*line;
 	int		line_i;
 
-	if (get_next_line(fd, &line) == 0)
+	if (gnl_fast(fd, &line) == 0)
 	{
 		free(line);
 		return (0);
@@ -29,7 +29,7 @@ int	get_x_size(char *file)
 	if (fd < 0)
 		error("error: invalid file name");
 	lines_n = 0;
-	while (get_next_line(fd, &line) > 0)
+	while (gnl_fast(fd, &line) > 0)
 	{
 		lines_n++;
 		ft_strfree(&line);
