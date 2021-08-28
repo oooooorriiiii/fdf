@@ -73,21 +73,26 @@ typedef struct s_data
 	float		height;
 }	t_data;
 
-t_data	file_reader(char *filename);
+t_data			file_reader(char *filename);
 
-void	*ft_malloc_zero(size_t size);
-void	ft_strstrfree(char **strstr);
+void			*ft_malloc_zero(size_t size);
+void			ft_strstrfree(char **strstr);
 unsigned int	ft_atoui_base(char *s, int base);
 
-int		gnl_fast(int fd, char **line);
+int				gnl_fast(int fd, char **line);
 
-void	init_data(t_data *data);
-t_base	**create_map(int x_size, int y_size);
+void			init_data(t_data *data);
+t_base			**create_map(int x_size, int y_size);
 
-void	draw_image(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int				get_x_size(char *file);
+int				get_y_size(char *filename);
+void			parse(char *filename, t_base **base,
+					int map_x_size, int map_y_size);
 
-void	draw_line(t_data *data, int x_i, int y_i, int calc_type);
+void			draw_image(t_data *data);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-void	error(char *err_msg);
+void			draw_line(t_data *data, int x_i, int y_i, int calc_type);
+
+void			error(char *err_msg);
 #endif

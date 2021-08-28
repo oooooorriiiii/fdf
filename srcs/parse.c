@@ -64,46 +64,42 @@ int	get_y_size(char *filename)
 	return (elems_n);
 }
 
+static void
+	base_setup(t_base **base, char **parsed_line, int *map_size, int *i)
+{
+	char	**z_and_color;
+
+	base[i[X]][i[Y]].x = i[Y] - map_size[Y] / 2;
+	base[i[X]][i[Y]].y = i[X] - map_size[X] / 2;
+	z_and_color = ft_split(parsed_line[i[Y]], ',');
+	base[i[X]][i[Y]].z = ft_atoi(z_and_color[0]);
+	if (z_and_color[1])
+		base[i[X]][i[Y]].color = ft_atoui_base(z_and_color[1], 16);
+	ft_strstrfree(z_and_color);
+	if (base[i[X]][i[Y]].color == 0)
+		base[i[X]][i[Y]].color = 0x0000FF00;
+}
+
 void	parse(char *filename, t_base **base, int map_x_size, int map_y_size)
 {
 	char	**parsed_line;
-	char	**z_and_color;
 	int		fd;
-	int		x_i;
-	int		y_i;
+	int		i[2];
+	int		map_size[2];
 
 	fd = open(filename, O_RDONLY);
-	x_i = -1;
-	while (++x_i < map_x_size)
+	i[X] = -1;
+	while (++i[X] < map_x_size)
 	{
 		parse_line(fd, &parsed_line);
-		y_i = -1;
-		while (++y_i < map_y_size)
+		i[Y] = -1;
+		while (++i[Y] < map_y_size)
 		{
-			base[x_i][y_i].x = y_i - map_y_size / 2;
-			base[x_i][y_i].y = x_i - map_x_size / 2;
-			z_and_color = ft_split(parsed_line[y_i], ',');
-			base[x_i][y_i].z = ft_atoi(z_and_color[0]);
-			if (z_and_color[1])
-				base[x_i][y_i].color = ft_atoui_base(z_and_color[1], 16);
-			ft_strstrfree(z_and_color);
-			if (base[x_i][y_i].color == 0)
-				base[x_i][y_i].color = 0x0000FF00;
+			map_size[X] = map_x_size;
+			map_size[Y] = map_y_size;
+			base_setup(base, parsed_line, map_size, i);
 		}
 		ft_strstrfree(parsed_line);
 	}
 	close(fd);
-}
-
-t_data	file_reader(char *filename)
-{
-	t_data	data;
-
-	data.map_x_size = get_x_size(filename);
-	data.map_y_size = get_y_size(filename);
-	data.base = create_map(data.map_x_size, data.map_y_size);
-	parse(filename, data.base, data.map_x_size, data.map_y_size);
-	data.isometric_base = create_map(data.map_x_size, data.map_y_size);
-	init_data(&data);
-	return (data);
 }

@@ -61,7 +61,7 @@ unsigned int
 	int		res;
 
 	len = ft_strlen(s);
-	pos= 0;
+	pos = 0;
 	res = 0;
 	while (len-- > 0)
 		res += atoui_convert(s[len], base) * power(base, pos++);
