@@ -48,9 +48,12 @@ void	generate_isometric_base(t_data *data)
 		y_i = -1;
 		while (++y_i < data->map_y_size)
 		{
-			data->isometric_base[x_i][y_i].x *= data->camera->zoom / 1.25;
-			data->isometric_base[x_i][y_i].y *= data->camera->zoom / 1.25;
-			data->isometric_base[x_i][y_i].z *= data->camera->zoom / 4;
+			// data->isometric_base[x_i][y_i].x *= data->camera->zoom / 1.25;
+			// data->isometric_base[x_i][y_i].y *= data->camera->zoom / 1.25;
+			// data->isometric_base[x_i][y_i].z *= data->camera->zoom / 4;
+			data->isometric_base[x_i][y_i].x *= 5;
+			data->isometric_base[x_i][y_i].y *= 5;
+			data->isometric_base[x_i][y_i].z *= 0.25;
 			convert_isometric_base(&(data->isometric_base[x_i][y_i].x),
 				&(data->isometric_base[x_i][y_i].y),
 				data->isometric_base[x_i][y_i].z);

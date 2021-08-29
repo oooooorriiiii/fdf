@@ -1,6 +1,6 @@
 #include "../includes/fdf.h"
 
-int	parse_line(int fd, char ***parse_line)
+static int	parse_line(int fd, char ***parse_line)
 {
 	char	*line;
 	int		line_i;
