@@ -25,6 +25,7 @@ enum	e_point
 {
 	X,
 	Y,
+	Z,
 };
 
 typedef struct s_calc
@@ -83,6 +84,9 @@ int				gnl_fast(int fd, char **line);
 
 void			init_data(t_data *data);
 t_base			**create_map(int x_size, int y_size);
+
+float			calc_default_xy_magnification(int map_x_size, int map_y_size);
+float			calc_default_z_magnification(t_data *data);
 
 int				get_x_size(char *file);
 int				get_y_size(char *filename);
