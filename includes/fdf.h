@@ -15,9 +15,14 @@
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
+
 # define KEY_ESC 65307
+# define KEY_ARROW_UP 65362
+# define KEY_ARROW_DOWN 65364
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
+
+
 # define X_LINE 0
 # define Y_LINE 1 
 
@@ -87,6 +92,9 @@ t_base			**create_map(int x_size, int y_size);
 
 float			calc_default_xy_magnification(int map_x_size, int map_y_size);
 float			calc_default_z_magnification(t_data *data);
+
+void	rotate_x(float *y, float *z, float theta_x);
+void	rotate(int key, t_data *data);
 
 int				get_x_size(char *file);
 int				get_y_size(char *filename);

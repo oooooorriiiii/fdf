@@ -59,6 +59,8 @@ void	generate_isometric_base(t_data *data)
 			convert_isometric_base(&(data->isometric_base[x_i][y_i].x),
 				&(data->isometric_base[x_i][y_i].y),
 				data->isometric_base[x_i][y_i].z);
+			rotate_x(&(data->isometric_base[x_i][y_i].y),
+				&(data->isometric_base[x_i][y_i].z), data->camera->theta_x);
 			data->isometric_base[x_i][y_i].x += WINDOW_WIDTH / 2;
 			data->isometric_base[x_i][y_i].y += WINDOW_HEIGHT / 2;
 			data->isometric_base[x_i][y_i].color = data->base[x_i][y_i].color;
@@ -86,4 +88,5 @@ void	draw_image(t_data *data)
 				draw_line(data, x_i, y_i, Y_LINE);
 		}
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
