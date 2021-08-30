@@ -29,7 +29,6 @@
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
 
-
 # define X_LINE 0
 # define Y_LINE 1 
 
@@ -122,11 +121,21 @@ void			parse(char *filename, t_base **base,
 					int map_x_size, int map_y_size);
 
 /*
-** draw_image.c
+** draw_image.c draw_image_bonus.c
 */
 void			draw_image(t_data *data);
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
+/*
+** draw_image_utils.c
+*/
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			duplicate_base(t_base **base, t_base **iso_base,
+					int	map_x_size, int map_y_size);
+void			convert_isometric_base(float *x, float *y, int z);
+
+/*
+** draw_image_line.c
+*/
 void			draw_line(t_data *data, int x_i, int y_i, int calc_type);
 
 void			error(char *err_msg);
