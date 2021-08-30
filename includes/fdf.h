@@ -11,7 +11,7 @@
 # include <sys/shm.h>
 # include <X11/extensions/XShm.h>
 # include "../minilibx-linux/mlx.h" 
-# include "../libft/get_next_line.h"
+# include "../libs/libft/libft.h"
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
@@ -32,6 +32,8 @@
 
 # define X_LINE 0
 # define Y_LINE 1 
+
+# define BUFFER_SIZE 1024
 
 enum	e_point
 {

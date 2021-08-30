@@ -81,7 +81,7 @@ int	gnl_fast(int fd, char **line)
 	c = buffered_getc_fd(fd);
 	while (c >= 0)
 	{
-		if (str_i && !(str_i & str_i - 1) && !resize_str(&ret_str, str_i * 2))
+		if (str_i && !(str_i & (str_i - 1)) && !resize_str(&ret_str, str_i * 2))
 			return (-1);
 		if (!padding_char_to_str(c, &str_i, &ret_str))
 			break ;

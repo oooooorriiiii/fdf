@@ -1,9 +1,10 @@
 NAME	=	fdf
 
 CC		=	gcc
-#CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 
 SRCS_DIR	=	srcs/
+LIB_DIR		=	libs
 
 SRCS	=	$(SRCS_DIR)main.c \
 			$(SRCS_DIR)parse.c \
@@ -34,20 +35,30 @@ BONUS	=	$(SRCS_DIR)draw_image_bonus.c \
 OBJS		=	$(SRCS:%.c=%.o)
 BONUS_OBJS	=	$(BONUS:%.c=%.o)
 
-MLX_DIR		=	minilibx-linux
-LIBFT_DIR	=	libft
+.SUFFIXES:	.o .c
 
+MLX_DIR		=	minilibx-linux
+LIBFT_DIR	=	$(LIB_DIR)/libft
+LIBFT_NAME	=	libft.a
+LIBFT		=	$(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME))
+
+.PHONY:	all
 all:	$(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -fsanitize=address -L$(MLX_DIR) libft/libft.a -lm -lmlx -lXext -lX11  -o $(NAME)
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -fsanitize=address -L$(MLX_DIR) \
+		$(LIBFT_DIR)/$(LIBFT_NAME) -lm -lmlx -lXext -lX11  -o $(NAME)
 
 # $(NAME): $(OBJS)
 # 	$(CC) $(OBJS) -L$(MLX_DIR) libft/libft.a -lmlx -lXext -lX11  -o $(NAME)
 
+$(LIBFT):
+	make -C $(LIBFT_DIR) $(LIBFT_NAME)
+
 .PHONY: bonus
-bonus: $(BONUS_OBJS)
-	$(CC) $(BONUS_OBJS) -fsanitize=address -L$(MLX_DIR) libft/libft.a -lm -lmlx -lXext -lX11  -o $(NAME)
+bonus: $(BONUS_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -fsanitize=address -L$(MLX_DIR) \
+		$(LIBFT_DIR)/$(LIBFT_NAME) -lm -lmlx -lXext -lX11  -o $(NAME)
 
 .PHONY: clean
 clean:
