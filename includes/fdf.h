@@ -98,20 +98,32 @@ int				gnl_fast(int fd, char **line);
 void			init_data(t_data *data);
 t_base			**create_map(int x_size, int y_size);
 
+/*
+** zoom.c
+*/
 float			calc_default_xy_magnification(int map_x_size, int map_y_size);
 float			calc_default_z_magnification(t_data *data);
 void			zoom(int key, t_data *data);
 
+/*
+** rotate.c
+*/
 void			rotate_x(float *y, float *z, float theta_x);
 void			rotate_y(float *x, float *z, float theta_y);
 void			rotate_z(float *x, float *y, float theta_z);
 void			rotate(int key, t_data *data);
 
+/*
+** parse.c
+*/
 int				get_x_size(char *file);
 int				get_y_size(char *filename);
 void			parse(char *filename, t_base **base,
 					int map_x_size, int map_y_size);
 
+/*
+** draw_image.c
+*/
 void			draw_image(t_data *data);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
