@@ -58,6 +58,8 @@ void	generate_isometric_base(t_data *data)
 				&(data->isometric_base[x_i][y_i].z), data->camera->theta_x);
 			rotate_y(&(data->isometric_base[x_i][y_i].x),
 				&(data->isometric_base[x_i][y_i].z), data->camera->theta_y);
+			rotate_z(&(data->isometric_base[x_i][y_i].x),
+				&(data->isometric_base[x_i][y_i].y), data->camera->theta_z);
 			data->isometric_base[x_i][y_i].x += WINDOW_WIDTH / 2;
 			data->isometric_base[x_i][y_i].y += WINDOW_HEIGHT / 2;
 			data->isometric_base[x_i][y_i].color = data->base[x_i][y_i].color;

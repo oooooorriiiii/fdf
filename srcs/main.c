@@ -18,11 +18,9 @@ int	key_hook(int key, void *v)
 	if (key == KEY_ESC)
 		closer(KEY_ESC, data);
 	else if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN ||
-			key == KEY_ARROW_RIGHT || key == KEY_ARROW_LEFT)
-			{
-				puts("rotate"); //aaaaaaa
+			key == KEY_ARROW_RIGHT || key == KEY_ARROW_LEFT ||
+			key == KEY_8 || key == KEY_9)
 		rotate(key, data);
-			}
 	return (0);
 }
 

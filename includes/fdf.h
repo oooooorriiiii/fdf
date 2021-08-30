@@ -21,6 +21,9 @@
 # define KEY_ARROW_DOWN 65364
 # define KEY_ARROW_RIGHT 65363
 # define KEY_ARROW_LEFT 65361
+# define KEY_8 56
+# define KEY_9 57
+
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
 
@@ -98,6 +101,7 @@ float			calc_default_z_magnification(t_data *data);
 
 void	rotate_x(float *y, float *z, float theta_x);
 void	rotate_y(float *x, float *z, float theta_y);
+void	rotate_z(float *x, float *y, float theta_z);
 void	rotate(int key, t_data *data);
 
 int				get_x_size(char *file);

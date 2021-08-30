@@ -22,6 +22,17 @@ void	rotate_y(float *x, float *z, float theta_y)
 	*z = -pre_x * sinf(theta_y) + pre_z * cosf(theta_y);
 }
 
+void	rotate_z(float *x, float *y, float theta_z)
+{
+	float	pre_x;
+	float	pre_y;
+
+	pre_x = *x;
+	pre_y = *y;
+	*x = pre_x * cosf(theta_z) - pre_y * sinf(theta_z);
+	*y = pre_x * sinf(theta_z) + pre_y * cosf(theta_z);
+}
+
 void	rotate(int key, t_data *data)
 {
 	if (key == KEY_ARROW_UP)
@@ -29,9 +40,13 @@ void	rotate(int key, t_data *data)
 	else if (key == KEY_ARROW_DOWN)
 		data->camera->theta_x -= 0.1;
 	else if (key == KEY_ARROW_RIGHT)
-		data->camera->theta_y  += 0.1;
+		data->camera->theta_y += 0.1;
 	else if (key == KEY_ARROW_LEFT)
-		data->camera->theta_y  -= 0.1;
+		data->camera->theta_y -= 0.1;
+	else if (key == KEY_8)
+		data->camera->theta_z += 0.1;
+	else if (key == KEY_9)
+		data->camera->theta_z -= 0.1;
 	ft_bzero(data->addr,
 		WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
 	draw_image(data);
