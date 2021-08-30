@@ -12,12 +12,17 @@ int	key_hook(int key, void *v)
 {
 	t_data	*data;
 
+	printf("key: %d\n", key); // aaaaaaaaa
 	data = (t_data *)v;
 	draw_image(data);
 	if (key == KEY_ESC)
 		closer(KEY_ESC, data);
-	else if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN)
+	else if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN ||
+			key == KEY_ARROW_RIGHT || key == KEY_ARROW_LEFT)
+			{
+				puts("rotate"); //aaaaaaa
 		rotate(key, data);
+			}
 	return (0);
 }
 
