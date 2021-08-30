@@ -41,3 +41,14 @@ float	calc_default_z_magnification(t_data *data)
 	}
 	return (magnification);
 }
+
+void	zoom(int key, t_data *data)
+{
+	if (key == KEY_PLUS)
+		data->camera->zoom += 10;
+	else if (key == KEY_MINUS)
+		data->camera->zoom -= 10;
+	ft_bzero(data->addr,
+		WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
+	draw_image(data);
+}

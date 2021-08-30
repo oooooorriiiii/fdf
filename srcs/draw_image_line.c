@@ -53,9 +53,9 @@ static void
 	init_calc_color(t_data *data, t_calc *calc, int calc_type, int *i_packet)
 {
 	if (calc_type == X_LINE)
-		calc->color = data->isometric_base[i_packet[X] + 1][i_packet[Y]].color;
+		calc->color = data->iso_base[i_packet[X] + 1][i_packet[Y]].color;
 	if (calc_type == Y_LINE)
-		calc->color = data->isometric_base[i_packet[X]][i_packet[Y] + 1].color;
+		calc->color = data->iso_base[i_packet[X]][i_packet[Y] + 1].color;
 }
 
 /*
@@ -70,19 +70,19 @@ void	draw_line(t_data *data, int x_i, int y_i, int calc_type)
 	int		point1[2];
 	int		i_packet[2];
 
-	point0[X] = data->isometric_base[x_i][y_i].x;
-	point0[Y] = data->isometric_base[x_i][y_i].y;
+	point0[X] = data->iso_base[x_i][y_i].x;
+	point0[Y] = data->iso_base[x_i][y_i].y;
 	point1[X] = 0;
 	point1[Y] = 0;
 	if (calc_type == X_LINE)
 	{
-		point1[X] = data->isometric_base[x_i + 1][y_i].x;
-		point1[Y] = data->isometric_base[x_i + 1][y_i].y;
+		point1[X] = data->iso_base[x_i + 1][y_i].x;
+		point1[Y] = data->iso_base[x_i + 1][y_i].y;
 	}
 	if (calc_type == Y_LINE)
 	{
-		point1[X] = data->isometric_base[x_i][y_i + 1].x;
-		point1[Y] = data->isometric_base[x_i][y_i + 1].y;
+		point1[X] = data->iso_base[x_i][y_i + 1].x;
+		point1[Y] = data->iso_base[x_i][y_i + 1].y;
 	}
 	calc = init_calc(point0[X], point0[Y], point1[X], point1[Y]);
 	i_packet[X] = x_i;

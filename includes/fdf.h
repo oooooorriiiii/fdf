@@ -23,6 +23,8 @@
 # define KEY_ARROW_LEFT 65361
 # define KEY_8 56
 # define KEY_9 57
+# define KEY_PLUS 59
+# define KEY_MINUS 45
 
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
@@ -80,7 +82,7 @@ typedef struct s_data
 	int			map_y_size;
 	float		default_magnification[3];
 	t_base		**base;
-	t_base		**isometric_base;
+	t_base		**iso_base;
 	t_camera	*camera;
 	float		height;
 }	t_data;
@@ -98,11 +100,12 @@ t_base			**create_map(int x_size, int y_size);
 
 float			calc_default_xy_magnification(int map_x_size, int map_y_size);
 float			calc_default_z_magnification(t_data *data);
+void			zoom(int key, t_data *data);
 
-void	rotate_x(float *y, float *z, float theta_x);
-void	rotate_y(float *x, float *z, float theta_y);
-void	rotate_z(float *x, float *y, float theta_z);
-void	rotate(int key, t_data *data);
+void			rotate_x(float *y, float *z, float theta_x);
+void			rotate_y(float *x, float *z, float theta_y);
+void			rotate_z(float *x, float *y, float theta_z);
+void			rotate(int key, t_data *data);
 
 int				get_x_size(char *file);
 int				get_y_size(char *filename);
