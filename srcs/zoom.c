@@ -31,15 +31,13 @@ float	calc_default_z_magnification(t_data *data)
 	{
 		y_i = -1;
 		while (++y_i < data->map_y_size)
-			if (max < data->isometric_base[x_i][y_i].z)
-				max = data->isometric_base[x_i][y_i].z;
+			if (max < data->base[x_i][y_i].z)
+				max = data->base[x_i][y_i].z;
 	}
 	if (max != 0)
 	{
 		while (magnification * max < 50)
-		{
 			magnification += 0.05;
-		}
 	}
 	return (magnification);
 }

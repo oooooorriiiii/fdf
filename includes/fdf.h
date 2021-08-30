@@ -73,6 +73,7 @@ typedef struct s_data
 	int			endian;
 	int			map_x_size;
 	int			map_y_size;
+	float		default_magnification[3];
 	t_base		**base;
 	t_base		**isometric_base;
 	t_camera	*camera;

@@ -41,21 +41,16 @@ void	generate_isometric_base(t_data *data)
 {
 	int		x_i;
 	int		y_i;
-	float	default_magnigication[3];
 
-	default_magnigication[X] = calc_default_xy_magnification(data->map_x_size,
-			data->map_y_size);
-	default_magnigication[Y] = default_magnigication[X];
-	default_magnigication[Z] = calc_default_z_magnification(data);
 	x_i = -1;
 	while (++x_i < data->map_x_size)
 	{
 		y_i = -1;
 		while (++y_i < data->map_y_size)
 		{
-			data->isometric_base[x_i][y_i].x *= default_magnigication[X];
-			data->isometric_base[x_i][y_i].y *= default_magnigication[Y];
-			data->isometric_base[x_i][y_i].z *= default_magnigication[Z];
+			data->isometric_base[x_i][y_i].x *= data->default_magnification[X];
+			data->isometric_base[x_i][y_i].y *= data->default_magnification[Y];
+			data->isometric_base[x_i][y_i].z *= data->default_magnification[Z];
 			convert_isometric_base(&(data->isometric_base[x_i][y_i].x),
 				&(data->isometric_base[x_i][y_i].y),
 				data->isometric_base[x_i][y_i].z);

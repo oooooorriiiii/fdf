@@ -18,6 +18,10 @@ void	init_data(t_data *data)
 {
 	data->camera = init_camera_data(data);
 	data->height = -0.1;
+	data->default_magnification[X] = calc_default_xy_magnification(
+			data->map_x_size, data->map_y_size);
+	data->default_magnification[Y] = data->default_magnification[X];
+	data->default_magnification[Z] = calc_default_z_magnification(data);
 }
 
 t_base	**create_map(int x_size, int y_size)
