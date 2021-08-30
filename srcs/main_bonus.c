@@ -16,6 +16,14 @@ int	key_hook(int key, void *v)
 	draw_image(data);
 	if (key == KEY_ESC)
 		closer(KEY_ESC, data);
+	else if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN
+		|| key == KEY_ARROW_RIGHT || key == KEY_ARROW_LEFT
+		|| key == KEY_8 || key == KEY_9)
+		rotate(key, data);
+	else if (key == KEY_PLUS || key == KEY_MINUS)
+		zoom(key, data);
+	else if (key == KEY_M)
+		draw_image_military(data);
 	return (0);
 }
 

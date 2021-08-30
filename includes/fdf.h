@@ -25,6 +25,7 @@
 # define KEY_9 57
 # define KEY_PLUS 59
 # define KEY_MINUS 45
+# define KEY_M 109
 
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
@@ -124,6 +125,7 @@ void			parse(char *filename, t_base **base,
 ** draw_image.c draw_image_bonus.c
 */
 void			draw_image(t_data *data);
+void			draw_image_military(t_data *data);
 
 /*
 ** draw_image_utils.c

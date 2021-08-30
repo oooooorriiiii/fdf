@@ -19,7 +19,7 @@ SRCS	=	$(SRCS_DIR)main.c \
 			$(SRCS_DIR)error.c
 
 BONUS	=	$(SRCS_DIR)draw_image_bonus.c \
-			$(SRCS_DIR)main.c	\
+			$(SRCS_DIR)main_bonus.c	\
 			$(SRCS_DIR)parse.c \
 			$(SRCS_DIR)init.c	\
 			$(SRCS_DIR)zoom.c	\
