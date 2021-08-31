@@ -10,8 +10,8 @@
 # include <sys/ipc.h>
 # include <sys/shm.h>
 # include <X11/extensions/XShm.h>
-# include "../minilibx-linux/mlx.h" 
-# include "../libs/libft/libft.h"
+# include "../includes/mlx.h" 
+# include "../includes/libft.h" 
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080

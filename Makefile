@@ -37,7 +37,7 @@ BONUS_OBJS	=	$(BONUS:%.c=%.o)
 
 .SUFFIXES:	.o .c
 
-MLX_DIR		=	minilibx-linux
+MLX_NAME	=	libmlx.a
 LIBFT_DIR	=	$(LIB_DIR)/libft
 LIBFT_NAME	=	libft.a
 LIBFT		=	$(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME))
@@ -46,22 +46,20 @@ LIBFT		=	$(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME))
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -fsanitize=address -L$(MLX_DIR) \
-		$(LIBFT_DIR)/$(LIBFT_NAME) -lm -lmlx -lXext -lX11  -o $(NAME)
-
-# $(NAME): $(OBJS)
-# 	$(CC) $(OBJS) -L$(MLX_DIR) libft/libft.a -lmlx -lXext -lX11  -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -fsanitize=address -L$(LIB_DIR) \
+		-L$(LIBFT_DIR) -lft -lm -lmlx -lXext -lX11 -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) $(LIBFT_NAME)
 
 .PHONY: bonus
 bonus: $(BONUS_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(BONUS_OBJS) -fsanitize=address -L$(MLX_DIR) \
-		$(LIBFT_DIR)/$(LIBFT_NAME) -lm -lmlx -lXext -lX11  -o $(NAME)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -fsanitize=address -L$(LIB_DIR) \
+		-L$(LIBFT_DIR) -lft -lm -lmlx -lXext -lX11 -o $(NAME)
 
 .PHONY: clean
 clean:
+	make -C $(LIBFT_DIR) fclean
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 .PHONY: fclean
