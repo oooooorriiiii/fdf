@@ -65,4 +65,4 @@ test_file.fdf
 .idea
 
 # libs
-!./libs/libmlx.a
+!libs/libmlx.a
