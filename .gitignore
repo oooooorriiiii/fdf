@@ -54,5 +54,15 @@ dkms.conf
 # fdf
 fdf
 
+# Test files
+test_4-4.fdf
+test_file.fdf
+
 # vscode
 .vscode
+
+# idea
+.idea
+
+# libs
+!./libs/libmlx.a
