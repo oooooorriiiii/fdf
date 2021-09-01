@@ -1,5 +1,4 @@
 #include "../includes/fdf.h"
-#include <time.h>
 
 int	closer(int keycode, t_data *data)
 {
@@ -13,7 +12,6 @@ int	key_hook(int key, void *v)
 	t_data	*data;
 
 	data = (t_data *)v;
-	draw_image(data);
 	if (key == KEY_ESC)
 		closer(KEY_ESC, data);
 	else if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN
@@ -24,6 +22,12 @@ int	key_hook(int key, void *v)
 		zoom(key, data);
 	else if (key == KEY_M)
 		draw_image_military(data);
+	else
+	{
+		ft_bzero(data->addr,
+			WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
+		draw_image(data);
+	}
 	return (0);
 }
 

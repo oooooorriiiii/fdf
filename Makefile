@@ -1,7 +1,7 @@
 NAME	=	fdf
 
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address 
 
 SRCS_DIR	=	srcs/
 LIB_DIR		=	libs
@@ -46,7 +46,7 @@ LIBFT		=	$(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME))
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -fsanitize=address -L$(LIB_DIR) \
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) \
 		-L$(LIBFT_DIR) -lft -lm -lmlx -lXext -lX11 -o $(NAME)
 
 $(LIBFT):
@@ -54,7 +54,7 @@ $(LIBFT):
 
 .PHONY: bonus
 bonus: $(BONUS_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(BONUS_OBJS) -fsanitize=address -L$(LIB_DIR) \
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -L$(LIB_DIR) \
 		-L$(LIBFT_DIR) -lft -lm -lmlx -lXext -lX11 -o $(NAME)
 
 .PHONY: clean

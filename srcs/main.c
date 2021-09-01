@@ -1,5 +1,4 @@
 #include "../includes/fdf.h"
-#include <time.h>
 
 int	closer(int keycode, t_data *data)
 {
