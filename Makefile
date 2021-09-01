@@ -25,6 +25,7 @@ BONUS	=	$(SRCS_DIR)draw_image_bonus.c \
 			$(SRCS_DIR)init.c	\
 			$(SRCS_DIR)zoom.c	\
 			$(SRCS_DIR)rotate.c	\
+			$(SRCS_DIR)move_bonus.c	\
 			$(SRCS_DIR)draw_image_utils.c	\
 			$(SRCS_DIR)draw_image_line.c \
 			$(SRCS_DIR)utils.c	\

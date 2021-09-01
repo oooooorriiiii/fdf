@@ -4,7 +4,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x <= 0 || x >= WINDOW_WIDTH || y <= 0 || y >= WINDOW_HEIGHT)
+	if (x <= 0 || x >= WIN_W || y <= 0 || y >= WIN_H)
 		return ;
 	dst = data->addr + (y * data->line_length
 			+ x * (data->bits_per_pixcel / 8));

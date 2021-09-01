@@ -22,10 +22,12 @@ int	key_hook(int key, void *v)
 		zoom(key, data);
 	else if (key == KEY_M)
 		draw_image_military(data);
+	else if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
+		move(key, data);
 	else
 	{
 		ft_bzero(data->addr,
-			WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
+			WIN_W * WIN_H * (data->bits_per_pixcel / 8));
 		draw_image(data);
 	}
 	return (0);
@@ -38,8 +40,8 @@ int	main(int args, char **argv)
 	(void)args;
 	data = file_reader(argv[1]);
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
-	data.img = mlx_new_image(data.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data.win = mlx_new_window(data.mlx, WIN_W, WIN_H, "fdf");
+	data.img = mlx_new_image(data.mlx, WIN_W, WIN_H);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixcel,
 			&data.line_length, &data.endian);
 	draw_image(&data);

@@ -48,6 +48,6 @@ void	rotate(int key, t_data *data)
 	else if (key == KEY_9)
 		data->camera->theta_z -= 0.1;
 	ft_bzero(data->addr,
-		WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
+		WIN_W * WIN_H * (data->bits_per_pixcel / 8));
 	draw_image(data);
 }

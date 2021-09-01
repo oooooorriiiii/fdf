@@ -18,8 +18,8 @@ static void
 			convert_isometric_base(&(data->iso_base[x_i][y_i].x),
 				&(data->iso_base[x_i][y_i].y),
 				data->iso_base[x_i][y_i].z);
-			data->iso_base[x_i][y_i].x += WINDOW_WIDTH / 2;
-			data->iso_base[x_i][y_i].y += WINDOW_HEIGHT / 2;
+			data->iso_base[x_i][y_i].x += WIN_W / 2;
+			data->iso_base[x_i][y_i].y += WIN_H / 2;
 			data->iso_base[x_i][y_i].color = data->base[x_i][y_i].color;
 		}
 	}

@@ -29,8 +29,8 @@ static void
 			convert_military_base(&(data->iso_base[i[X]][i[Y]].x),
 				&(data->iso_base[i[X]][i[Y]].y),
 				data->iso_base[i[X]][i[Y]].z);
-			data->iso_base[i[X]][i[Y]].x += WINDOW_WIDTH / 2;
-			data->iso_base[i[X]][i[Y]].y += WINDOW_HEIGHT / 2;
+			data->iso_base[i[X]][i[Y]].x += WIN_W / 2;
+			data->iso_base[i[X]][i[Y]].y += WIN_H / 2;
 			data->iso_base[i[X]][i[Y]].color = data->base[i[X]][i[Y]].color;
 		}
 	}
@@ -44,7 +44,7 @@ void	draw_image_military(t_data *data)
 	duplicate_base(data->base, data->iso_base,
 		data->map_x_size, data->map_y_size);
 	ft_bzero(data->addr,
-		WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
+		WIN_W * WIN_H * (data->bits_per_pixcel / 8));
 	generate_military_base_bonus(data);
 	x_i = -1;
 	while (++x_i < data->map_x_size)
@@ -84,8 +84,8 @@ static void
 				&(data->iso_base[i[X]][i[Y]].z), data->camera->theta_y);
 			rotate_z(&(data->iso_base[i[X]][i[Y]].x),
 				&(data->iso_base[i[X]][i[Y]].y), data->camera->theta_z);
-			data->iso_base[i[X]][i[Y]].x += WINDOW_WIDTH / 2;
-			data->iso_base[i[X]][i[Y]].y += WINDOW_HEIGHT / 2;
+			data->iso_base[i[X]][i[Y]].x += WIN_W / 2 + data->camera->move_x;
+			data->iso_base[i[X]][i[Y]].y += WIN_H / 2 + data->camera->move_y;
 			data->iso_base[i[X]][i[Y]].color = data->base[i[X]][i[Y]].color;
 		}
 	}

@@ -6,10 +6,10 @@ float	calc_default_xy_magnification(int map_x_size, int map_y_size)
 	int		y_i;
 
 	x_i = 1;
-	while (x_i * map_x_size < WINDOW_WIDTH)
+	while (x_i * map_x_size < WIN_W)
 		x_i++;
 	y_i = 1;
-	while (y_i * map_y_size < WINDOW_HEIGHT)
+	while (y_i * map_y_size < WIN_H)
 		y_i++;
 	if (x_i > y_i)
 		return (y_i / 1.73);
@@ -68,8 +68,11 @@ void	zoom(int key, t_data *data)
 	if (key == KEY_PLUS)
 		data->camera->zoom += 10;
 	else if (key == KEY_MINUS)
-		data->camera->zoom -= 10;
+	{
+		if (data->camera->zoom >= 10)
+			data->camera->zoom -= 10;
+	}
 	ft_bzero(data->addr,
-		WINDOW_WIDTH * WINDOW_HEIGHT * (data->bits_per_pixcel / 8));
+		WIN_W * WIN_H * (data->bits_per_pixcel / 8));
 	draw_image(data);
 }

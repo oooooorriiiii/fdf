@@ -7,10 +7,13 @@ static t_camera	*init_camera_data(t_data *data)
 	ret_camera_struct_ptr = ft_malloc_zero(sizeof(t_camera));
 	if (ret_camera_struct_ptr == NULL)
 		error("failed malloc");
-	ret_camera_struct_ptr->zoom = WINDOW_WIDTH / (2 * data->map_y_size);
+	ret_camera_struct_ptr->zoom = WIN_W / (2 * data->map_y_size);
 	ret_camera_struct_ptr->theta_x = 0;
 	ret_camera_struct_ptr->theta_y = 0;
 	ret_camera_struct_ptr->theta_z = 0;
+	ret_camera_struct_ptr->move_x = 0;
+	ret_camera_struct_ptr->move_y = 0;
+	ret_camera_struct_ptr->move_z = 0;
 	return (ret_camera_struct_ptr);
 }
 

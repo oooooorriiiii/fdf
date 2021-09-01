@@ -13,8 +13,8 @@
 # include "../includes/mlx.h" 
 # include "../includes/libft.h" 
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WIN_W 1920
+# define WIN_H 1080
 
 # define KEY_ESC 65307
 # define KEY_ARROW_UP 65362
@@ -26,6 +26,10 @@
 # define KEY_PLUS 59
 # define KEY_MINUS 45
 # define KEY_M 109
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 # define EVENT_KEY_PRESS 2
 # define EVENT_KEY_RELEASE 3
@@ -69,6 +73,9 @@ typedef struct s_camera
 	float	theta_x;
 	float	theta_y;
 	float	theta_z;
+	int		move_x;
+	int		move_y;
+	int		move_z;
 }	t_camera;
 
 typedef struct s_data
@@ -114,6 +121,11 @@ void			rotate_x(float *y, float *z, float theta_x);
 void			rotate_y(float *x, float *z, float theta_y);
 void			rotate_z(float *x, float *y, float theta_z);
 void			rotate(int key, t_data *data);
+
+/*
+** move_bonus.c
+*/
+void			move(int key, t_data *data);
 
 /*
 ** parse.c
