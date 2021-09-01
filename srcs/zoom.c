@@ -65,12 +65,16 @@ float	calc_default_z_magnification(t_data *data)
 
 void	zoom(int key, t_data *data)
 {
+	int	magnification_xy;
+
+	magnification_xy = calc_default_xy_magnification(data->map_x_size,
+			data->map_y_size);
 	if (key == KEY_PLUS)
-		data->camera->zoom += 10;
+		data->camera->zoom += magnification_xy;
 	else if (key == KEY_MINUS)
 	{
-		if (data->camera->zoom >= 10)
-			data->camera->zoom -= 10;
+		if (data->camera->zoom >= magnification_xy)
+			data->camera->zoom -= magnification_xy;
 	}
 	ft_bzero(data->addr,
 		WIN_W * WIN_H * (data->bits_per_pixcel / 8));
