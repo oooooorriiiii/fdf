@@ -17,29 +17,50 @@ float	calc_default_xy_magnification(int map_x_size, int map_y_size)
 		return (x_i / 1.73);
 }
 
-float	calc_default_z_magnification(t_data *data)
+static float
+	return_z_mag(int max, int min, float magnification, float magnification_neg)
 {
-	int		max;
-	int		x_i;
-	int		y_i;
-	float	magnification;
-
-	max = 0;
-	magnification = 0.05;
-	x_i = -1;
-	while (++x_i < data->map_x_size)
-	{
-		y_i = -1;
-		while (++y_i < data->map_y_size)
-			if (max < data->base[x_i][y_i].z)
-				max = data->base[x_i][y_i].z;
-	}
 	if (max != 0)
 	{
 		while (magnification * max < 50)
 			magnification += 0.05;
 	}
-	return (magnification);
+	if (min != 0)
+	{
+		while (magnification_neg * -min < 50)
+			magnification_neg += 0.05;
+	}
+	if (magnification > magnification_neg)
+		return (magnification);
+	else
+		return (magnification_neg);
+}
+
+float	calc_default_z_magnification(t_data *data)
+{
+	int		max;
+	int		min;
+	int		i[2];
+	float	magnification;
+	float	magnification_neg;
+
+	max = 0;
+	min = 0;
+	magnification = 0.05;
+	magnification_neg = 0.05;
+	i[X] = -1;
+	while (++i[X] < data->map_x_size)
+	{
+		i[Y] = -1;
+		while (++i[Y] < data->map_y_size)
+		{
+			if (max < data->base[i[X]][i[Y]].z)
+				max = data->base[i[X]][i[Y]].z;
+			if (min >data->base[i[X]][i[Y]].z)
+				min = data->base[i[X]][i[Y]].z;
+		}
+	}
+	return (return_z_mag(max, min, magnification, magnification_neg));
 }
 
 void	zoom(int key, t_data *data)

@@ -17,7 +17,7 @@ static t_camera	*init_camera_data(t_data *data)
 void	init_data(t_data *data)
 {
 	data->camera = init_camera_data(data);
-	data->height = -0.1;
+	data->height = 0;
 	data->default_magnification[X] = calc_default_xy_magnification(
 			data->map_x_size, data->map_y_size);
 	data->default_magnification[Y] = data->default_magnification[X];
