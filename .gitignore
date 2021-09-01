@@ -55,8 +55,7 @@ dkms.conf
 fdf
 
 # Test files
-test_4-4.fdf
-test_file.fdf
+test/
 
 # vscode
 .vscode

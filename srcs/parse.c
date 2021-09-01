@@ -5,7 +5,7 @@ static int	parse_line(int fd, char ***parse_line)
 	char	*line;
 	int		line_i;
 
-	if (gnl_fast(fd, &line) == 0)
+	if (gnl_fast(fd, &line) == 0 && line[0] == '\0')
 	{
 		free(line);
 		return (0);
@@ -34,6 +34,8 @@ int	get_x_size(char *file)
 		lines_n++;
 		ft_strfree(&line);
 	}
+	if (line[0] != '\0')
+		lines_n++;
 	ft_strfree(&line);
 	close(fd);
 	return (lines_n);
