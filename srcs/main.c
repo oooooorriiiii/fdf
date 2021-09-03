@@ -22,7 +22,8 @@ int	main(int args, char **argv)
 {
 	t_data	data;
 
-	(void)args;
+	if (args != 2)
+		error("Argument error");
 	data = file_reader(argv[1]);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIN_W, WIN_H, "fdf");

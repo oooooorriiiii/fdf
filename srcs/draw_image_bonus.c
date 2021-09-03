@@ -74,10 +74,10 @@ static void
 		{
 			data->iso_base[i[X]][i[Y]].x *= data->camera->zoom;
 			data->iso_base[i[X]][i[Y]].y *= data->camera->zoom;
-			data->iso_base[i[X]][i[Y]].z *= data->camera->zoom;
+			data->iso_base[i[X]][i[Y]].z *= data->camera->zoom
+				* data->default_magnification[Z] * 0.1;
 			convert_isometric_base(&(data->iso_base[i[X]][i[Y]].x),
-				&(data->iso_base[i[X]][i[Y]].y),
-				data->iso_base[i[X]][i[Y]].z);
+				&(data->iso_base[i[X]][i[Y]].y), data->iso_base[i[X]][i[Y]].z);
 			rotate_x(&(data->iso_base[i[X]][i[Y]].y),
 				&(data->iso_base[i[X]][i[Y]].z), data->camera->theta_x);
 			rotate_y(&(data->iso_base[i[X]][i[Y]].x),
